@@ -1,10 +1,15 @@
 package models
 
-import "time"
 
-type Post struct {
-    ID        string    `json:"id"`
+
+type InputPost struct {
     Title     string    `json:"title"`
     Content   string    `json:"content"`
-    CreatedAt time.Time `json:"created_at"`
+}
+
+type OutputPost struct {
+    ID        int    `json:"id"`
+    Title     string    `json:"title"`
+    Content   string    `json:"content"`
+    CreatedAt string`json:"created_at"`
 }
