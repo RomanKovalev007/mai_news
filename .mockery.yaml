@@ -1,0 +1,4 @@
+packages:
+    github.com/RomanKovalev007/mai_news/internal/handlers:
+        interfaces:
+            Poster:

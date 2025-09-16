@@ -25,7 +25,7 @@ func GetAllPostsHandler(poster Poster, log *slog.Logger) http.HandlerFunc {
 		posts, err := poster.GetAllPosts()
 		if err != nil {
 			http.Error(w, "Post not found", http.StatusNotFound)
-			log.Error("failed to get all posts", err)
+			log.Error("failed to get all posts", slog.String("error", err.Error()))
 			return
 		}
 		json.NewEncoder(w).Encode(posts)
@@ -45,7 +45,7 @@ func CreatePostHandler(poster Poster, log *slog.Logger) http.HandlerFunc {
 		createdPost, err := poster.SavePost(post)
 		if err != nil {
 			http.Error(w, "failed to save post", http.StatusInternalServerError)
-			log.Error("failed to save post", err)
+			log.Error("failed to save post", slog.String("error", err.Error()))
 			return 
 		}
 
@@ -66,7 +66,7 @@ func GetPostHandler(poster Poster, log *slog.Logger) http.HandlerFunc {
 		post, err := poster.GetPost(id)
 		if err != nil {
 			http.Error(w, "Post not found", http.StatusNotFound)
-			log.Error("failed to get post", err)
+			log.Error("failed to get post", slog.String("error", err.Error()))
 			return
 		}
 		json.NewEncoder(w).Encode(post)
@@ -92,7 +92,7 @@ func PatchPostHandler(poster Poster, log *slog.Logger) http.HandlerFunc {
 		post, err := poster.PatchPost(id, inputPost)
 		if err != nil {
 			http.Error(w, "Post not found", http.StatusNotFound)
-			log.Error("failed to patch post", err)
+			log.Error("failed to patch post", slog.String("error", err.Error()))
 			return
 		}
 		json.NewEncoder(w).Encode(post)
@@ -111,7 +111,7 @@ func DeletePostHandler(poster Poster, log *slog.Logger) http.HandlerFunc {
 		err = poster.DeletePost(id)
 		if err != nil {
 			http.Error(w, "Post not found", http.StatusNotFound)
-			log.Error("failed to delete post", err)
+			log.Error("failed to delete post", slog.String("error", err.Error()))
 			return
 		}
 	}
